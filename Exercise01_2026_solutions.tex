@@ -1,0 +1,227 @@
+\documentclass[11pt,a4paper]{article}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amsthm}
+\usepackage{newtxtext}
+\usepackage{newtxmath}
+\usepackage{enumitem}
+\usepackage{microtype}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{4pt}
+\allowdisplaybreaks
+
+\newcommand{\E}{\mathbb{E}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\N}{\mathbb{N}}
+\newcommand{\Q}{\mathbb{Q}}
+\newcommand{\F}{\mathcal{F}}
+\newcommand{\G}{\mathcal{G}}
+\newcommand{\Hc}{\mathcal{H}}
+\newcommand{\1}{\mathbf{1}}
+\newcommand{\Leb}{\mathrm{Leb}}
+\newcommand{\sgn}{\operatorname{sgn}}
+\newcommand{\prob}[1]{\par\medskip\noindent\textbf{#1}\quad}
+\newcommand{\sub}[1]{\par\smallskip\noindent\textbf{#1}\ }
+\newcommand{\note}[1]{\par\noindent\emph{Remark.} #1}
+
+\begin{document}
+
+\begin{center}
+{\large\textbf{Stochastic Processes --- 1060429}}\\[2pt]
+Nawar Sgier, 326586047
+\end{center}
+
+\noindent Throughout, a Brownian motion (BM) is standard ($B_0=0$) with continuous paths, and
+$\F_t$ denotes the filtration in use. Apparent typos are pointed out where they occur.
+
+\section*{Exercise 1}
+\subsection*{Relations between stochastic processes}
+
+\prob{1.}
+Let $\Omega_0=\{X,Y\text{ right-continuous}\}\cap\bigcap_{q\in\Q_+}\{X_q=Y_q\}$. The first event
+contains a measurable set of probability $1$, and each $\{X_q=Y_q\}$ has probability $1$
+(modification), so $\Omega_0$ contains a measurable set of probability $1$ (countable
+intersection). For $\omega\in\Omega_0$ and $t\ge0$ take $q_n\in\Q_+$, $q_n\downarrow t$; then
+$X_t(\omega)=\lim X_{q_n}(\omega)=\lim Y_{q_n}(\omega)=Y_t(\omega)$. Hence $X_t=Y_t$ for all $t$ on
+$\Omega_0$, i.e.\ $X,Y$ are indistinguishable.
+
+\prob{2.}
+Let $Q_0=\Q\cap[0,t_0)$ and
+\[
+ C_{t_0}=\bigcap_{k\ge1}\bigcup_{m\ge1}\ \bigcap_{s,u\in Q_0,\ |s-u|<1/m}\{|X_s-X_u|\le 1/k\}
+ \in\sigma(X_t:t\le t_0).
+\]
+\textit{Claim.} If the path $X(\omega)$ is RCLL on $[0,t_0]$, then $\omega\in A_{t_0}\iff \omega\in C_{t_0}$.
+
+If $X(\omega)$ is continuous on $[0,t_0)$ and has a left limit at $t_0$, it extends continuously to
+$[0,t_0]$, so it is uniformly continuous on $[0,t_0)$ and $\omega\in C_{t_0}$. Conversely, let
+$\omega\in C_{t_0}$, $k\ge1$, and $m$ as in the definition. For $s,u\in[0,t_0)$ with $|s-u|<1/m$
+choose $q_j,r_j\in Q_0$ with $q_j\downarrow s$, $r_j\downarrow u$ and $|q_j-r_j|<1/m$ (possible as
+$s,u<t_0$). By right-continuity $|X_s-X_u|=\lim|X_{q_j}-X_{r_j}|\le1/k$. So $X(\omega)$ is
+uniformly continuous on $[0,t_0)$, hence $\omega\in A_{t_0}$.
+
+\sub{(a)} If every path is RCLL, the claim gives $A_{t_0}=C_{t_0}\in\sigma(X_t:t\le t_0)$.
+
+\sub{(b)} Let $\Omega=[0,1]$, $\F=\mathcal B([0,1])$, $\P=\Leb$, and let $C$ be the Cantor set. Since
+$|\mathcal P(C)|=2^{\mathfrak c}>\mathfrak c=|\mathcal B([0,1])|$, there is $E\subset C$ with
+$E\notin\F$. Define $X_t(\omega)=\1_{E}(\omega)\1_{\{t=\omega\}}$. Then $X_t=\1_{E\cap\{t\}}$ is the
+indicator of the empty set or of a single point, so it is measurable. For $\omega\notin E$ the path is $\equiv0$. For
+$\omega\in E$ the path has a spike at $t=\omega$ and is not right-continuous there. Thus
+$\{X\text{ RCLL}\}=\Omega\setminus E\supseteq\Omega\setminus C$ and $\P(\Omega\setminus C)=1$, so
+$X$ is RCLL with probability $1$. But $A_2=\Omega\setminus E\notin\F$, and in particular
+$A_2\notin\sigma(X_t:t\le 2)\subseteq\F$.
+
+\sub{(c)} There is $N\in\F$ with $\P(N)=0$ such that every path outside $N$ is RCLL. By the claim,
+$A_{t_0}\triangle C_{t_0}\subseteq N$. Completeness of $\F_{t_0}$ (it contains every subset of a
+$\P$-null set) gives $A_{t_0}\setminus C_{t_0},\,C_{t_0}\setminus A_{t_0}\in\F_{t_0}$. Hence
+$A_{t_0}=(C_{t_0}\setminus(C_{t_0}\setminus A_{t_0}))\cup(A_{t_0}\setminus C_{t_0})\in\F_{t_0}$.
+
+\subsection*{Brownian motion}
+
+\prob{1.}
+\note{The condition should read $\E[|X_t-X_s|^\alpha]\le M|t-s|^{1+\beta}$ for all $t,s\in[0,T]$. In (c) the
+bound should be $2^{-\gamma n}$, not $2^{-m}$. In (e),(f) the index set is $[0,1]$.}
+
+\sub{(a)} Put $\tilde X_u=X_{uT}$, $u\in[0,1]$. Then $\E|\tilde X_u-\tilde X_v|^\alpha\le
+MT^{1+\beta}|u-v|^{1+\beta}$, which is the hypothesis on $[0,1]$ with constant $MT^{1+\beta}$. If
+$\tilde Y$ is a modification of $\tilde X$ that is a.s.\ $\gamma$-H\"older, then
+$Y_t=\tilde Y_{t/T}$ satisfies $\P(Y_t=X_t)=\P(\tilde Y_{t/T}=\tilde X_{t/T})=1$, and
+$|Y_t-Y_s|\le K|t/T-s/T|^\gamma=KT^{-\gamma}|t-s|^\gamma$.
+
+\sub{(b)} By Markov's inequality, $\P(|X_t-X_s|>\varepsilon)\le\varepsilon^{-\alpha}M|t-s|^{1+\beta}\to0$ as $t\to s$.
+
+\sub{(c)} By a union bound and Markov's inequality,
+\[
+\P\Big(\max_{1\le k\le 2^n}|X_{k2^{-n}}-X_{(k-1)2^{-n}}|>2^{-\gamma n}\Big)
+\le 2^n\cdot 2^{\gamma\alpha n}M2^{-n(1+\beta)}=M2^{-n(\beta-\alpha\gamma)},
+\]
+which is summable since $\gamma<\beta/\alpha$. By Borel--Cantelli, a.s.\ only finitely many of these
+events occur. Let $N(\omega)$ be the last $n$ at which one occurs ($N=0$ if none occurs). Then
+$\P(N<\infty)=1$ and $\max_k|X_{k2^{-n}}-X_{(k-1)2^{-n}}|\le2^{-\gamma n}$ for all $n>N(\omega)$.
+
+\sub{(d)} Fix $\omega$ with $N(\omega)<\infty$.
+\emph{Claim:} for $m>n\ge N(\omega)$ and $s<t$ in $D_m$ with $t-s<2^{-n}$,
+\[|X_t-X_s|\le2\sum_{j=n+1}^m2^{-\gamma j}.\]
+We use induction on $m$. For $m=n+1$ we have $t-s=2^{-(n+1)}$, and the bound holds by (c). For the step
+$m\to m+1$, let $s,t\in D_{m+1}$. Let $s'=\min\{r\in D_m:r\ge s\}$ and $t'=\max\{r\in D_m:r\le t\}$. Then
+$s'-s,\ t-t'\in\{0,2^{-(m+1)}\}$, and $s'\le t'$ (otherwise $s<t<s'\le s+2^{-(m+1)}$, which is
+impossible in $D_{m+1}$). Since $t'-s'\le t-s<2^{-n}$, the induction hypothesis (or $t'=s'$) and
+(c) at level $m+1>N$ give
+\[|X_t-X_s|\le 2\sum_{j=n+1}^m2^{-\gamma j}+2\cdot2^{-\gamma(m+1)}.\]
+Now let $s<t$ in $D=\bigcup_mD_m$ with $t-s<2^{-N(\omega)}$. Choose $n$ with
+$2^{-(n+1)}\le t-s<2^{-n}$, so $n\ge N(\omega)$, and choose $m>n$ with $s,t\in D_m$. Then
+\[
+|X_t-X_s|\le 2\sum_{j>n}2^{-\gamma j}=\frac{2\cdot2^{-\gamma(n+1)}}{1-2^{-\gamma}}\le C_\gamma|t-s|^\gamma,
+\qquad C_\gamma=\frac{2}{1-2^{-\gamma}}.
+\]
+
+\sub{(e)} Let $s<t$ in $D$ with $t-s\ge2^{-N}$. The points of $D_{N+1}\cap(s,t)$ together with $s,t$
+form a chain $s=u_0<\dots<u_k=t$ in $D$ with consecutive gaps $<2^{-N}$ and $k\le2^{N+1}+1$.
+Each gap contributes at most $C_\gamma2^{-N\gamma}\le C_\gamma|t-s|^\gamma$. Hence on $\{N<\infty\}$,
+\[|X_t-X_s|\le K(\omega)|t-s|^\gamma\ \text{ for all } s,t\in D,\qquad K=(2^{N+1}+1)C_\gamma.\]
+
+\sub{(f)} On $\Omega^*=\{N<\infty\}$, $X|_D$ is uniformly continuous, so
+$Y_t:=\lim_{D\ni r\to t}X_r$ exists for all $t\in[0,1]$. Set $Y\equiv0$ off $\Omega^*$. Each $Y_t$ is
+measurable (a limit along a sequence), and $Y$ is $\gamma$-H\"older on $[0,1]$ with constant $K$ by
+continuity. For fixed $t$ take $r_j\in D$, $r_j\to t$: then $X_{r_j}\to Y_t$ a.s.\ and
+$X_{r_j}\to X_t$ in probability by (b). Limits in probability are a.s.\ unique, so $Y_t=X_t$ a.s.,
+and $Y$ is a modification of $X$. $Y$ does not depend on $\gamma$. Taking $\gamma_k\uparrow\beta/\alpha$
+and intersecting the corresponding events $\Omega^*_{\gamma_k}$ shows that a.s.\ $Y$ is $\gamma$-H\"older for every
+$\gamma<\beta/\alpha$.
+
+\prob{2.}
+Here $t_0$ is a local maximum if there is $\varepsilon>0$ with $B_s\le B_{t_0}$ for all
+$s\in[0,\infty)\cap(t_0-\varepsilon,t_0+\varepsilon)$.
+
+\sub{(a)} $W_s=B_{t_0+s}-B_{t_0}$ is a BM. If $t_0$ is a local maximum, then $\max_{[0,1/n]}W\le0$ for some $n$.
+By the reflection principle,
+\[\P\big(\max_{[0,1/n]}W\ge a\big)=2\P(W_{1/n}\ge a)\xrightarrow[a\downarrow0]{}1,\]
+so $\P(\max_{[0,1/n]}W>0)=1$ for every $n$. Hence
+$\P\big(\bigcup_n\{\max_{[0,1/n]}W\le0\}\big)=0$, and $\{t_0\text{ local max}\}$ is contained in a null set.
+
+\sub{(b)} $B$ attains its maximum on $[0,1]$ at some $t^*$. By (a) with $t_0=0$, a.s.\ $t^*\neq0$. The process
+$W_s=B_1-B_{1-s}$, $s\in[0,1]$, is a continuous centred Gaussian process. Its covariance is
+\[
+\mathrm{Cov}(W_s,W_u)=1-(1-u)-(1-s)+(1-s\vee u)=s\wedge u,
+\]
+so $W$ is a BM on $[0,1]$. Moreover $t^*=1$ means $\min_{[0,1]}W\ge0$, which has probability $0$ by the argument of (a)
+applied to $-W$. So a.s.\ $t^*\in(0,1)$, and $t^*$ is a local maximum of $B$.
+
+\prob{3.}
+\sub{(a)} Let $Z_n=(B_{1/n}-B_{1/(n+1)})/\sqrt{1/n-1/(n+1)}$. The intervals $[\frac1{n+1},\frac1n]$ are
+disjoint, so the $Z_n$ are i.i.d.\ $N(0,1)$. Then $\sum_n\P(Z_n\ge K)=\sum_n\P(Z_1\ge K)=\infty$, and the second Borel--Cantelli
+lemma gives $\P(Z_n\ge K\text{ i.o.})=1$.
+
+\sub{(b)} Fix rationals $p<q$. The process $W_t=B_{p+t}-B_p$ is a BM. Applying (a) to $W$ for every $K\in\N$, a.s.\ for all $K$
+there are infinitely many $n$ with $1/n\le q-p$ and
+\[|W_{1/n}-W_{1/(n+1)}|\ge K|1/n-1/(n+1)|^{1/2}.\]
+So $B$ is not $\frac12$-H\"older on $[p,q]$. Intersecting over the countably many pairs $(p,q)$, and using that every
+non-trivial interval contains some $[p,q]$, gives the claim.
+
+\prob{4.}
+Let $n\in\N$, $h=1/n$, $t_k=kh$, $\delta=\varepsilon/4$. Let $L$ be the piecewise linear interpolation of
+$(t_k,B_{t_k})_k$ and $Z=B-L$. On $[t_{k-1},t_k]$,
+\[
+Z_s=(B_s-B_{t_{k-1}})-\tfrac{s-t_{k-1}}{h}(B_{t_k}-B_{t_{k-1}}),\qquad\text{so}\quad
+\sup_{[t_{k-1},t_k]}|Z|\le2\sup_{u\in[0,h]}|B_{t_{k-1}+u}-B_{t_{k-1}}|.
+\]
+\emph{Independence.} $(Z_s)_s$ and $(B_{t_j})_j$ are jointly Gaussian and
+$\mathrm{Cov}(Z_s,B_{t_j})=0$. For $t_j\le t_{k-1}$ this covariance equals
+$t_j-\frac{(t_k-s)t_j+(s-t_{k-1})t_j}{h}=0$, and for $t_j\ge t_k$ it equals
+$s-\frac{(t_k-s)t_{k-1}+(s-t_{k-1})t_k}{h}=0$. Hence $\sigma(Z_s:s\in[0,1])$ is independent of
+$(B_{t_1},\dots,B_{t_n})$.
+
+Let $f_h$ be the linear interpolation of $(t_k,f(t_k))$. Then $|f_h-f|\le\omega_f(h)$, where
+$\omega_f$ is the modulus of continuity. Consider the events
+\[
+A=\{\max_k|B_{t_k}-f(t_k)|<\delta\},\qquad C=\{\sup_{[0,1]}|Z|<\delta\}.
+\]
+On $A\cap C$ we have $|B_t-f(t)|\le|L_t-f_h(t)|+|f_h(t)-f(t)|+|Z_t|<2\delta+\omega_f(h)$, which is
+$<\varepsilon$ once $\omega_f(h)<\varepsilon/2$.
+
+$\P(A)>0$, since $(B_{t_1},\dots,B_{t_n})$ is an invertible linear image of i.i.d.\ $N(0,h)$
+increments and so has an everywhere positive density. The suprema over the different intervals are independent
+(independent increments) and each has the law of $\sup_{[0,h]}|B|$. By scaling,
+\[
+\P(C)\ge\P\big(\sup_{[0,h]}|B|<\delta/2\big)^n=\P\big(\sup_{[0,1]}|B|<\delta/(2\sqrt h)\big)^n.
+\]
+The inner probability tends to $1$ as $h\to0$, so it is positive for $h$ small. Choosing such
+$h$ with also $\omega_f(h)<\varepsilon/2$, independence gives
+$\P(\sup_{[0,1]}|B-f|<\varepsilon)\ge\P(A)\P(C)>0$.
+
+\prob{5.}
+\sub{(a)} $X_0=0$ and $X$ has continuous paths. For $0\le t_0<\dots<t_k$, the increments
+$X_{t_i}-X_{t_{i-1}}=a\cdot(B_{t_i}-B_{t_{i-1}})$ are functions of the independent vectors
+$B_{t_i}-B_{t_{i-1}}$, hence independent. Each is a sum of independent
+$N(0,a_j^2(t_i-t_{i-1}))$ variables, i.e.\ $N(0,|a|^2(t_i-t_{i-1}))=N(0,t_i-t_{i-1})$. So $X$ is a BM.
+
+\sub{(b)} By (a) each coordinate $Y^i=a_i\cdot B$ is a BM, where $a_i$ is the $i$-th row. All $Y^i_t$ are linear combinations of the
+Gaussian family $(B^j_t)$, so $(Y^1,\dots,Y^m)$ is jointly Gaussian with
+$\mathrm{Cov}(Y^i_s,Y^j_t)=(a_i\cdot a_j)(s\wedge t)=\delta_{ij}(s\wedge t)$. Uncorrelated jointly Gaussian
+families are independent: the finite-dimensional distributions factor, and a $\pi$--$\lambda$
+argument finishes the proof. So $Y^1,\dots,Y^m$ are independent BMs.
+
+\sub{(c)} For $R\in SO(d)$ the rows are orthonormal, so by (b) $RB$ consists of $d$ independent BMs, i.e.\
+it is a $d$-dimensional BM. Since the law of a process is determined by its finite-dimensional distributions,
+$(RB_t)_t\overset{d}{=}(B_t)_t$.
+
+\prob{6.}
+For a partition $\pi$ of $[0,T]$ write $Q_\pi(X)=\sum_i(X_{t_i}-X_{t_{i-1}})^2$. We use the known result
+that $Q_\pi(B)\to b-a$ in $L^2$ on any interval $[a,b]$; indeed
+$\E(Q_\pi(B)-(b-a))^2=2\sum\Delta t_i^2\le2(b-a)|\pi|$.
+
+\sub{(a)} $Q_\pi(aB)=a^2Q_\pi(B)\to a^2T$.
+
+\sub{(b)} $W_t=c^{-1/2}B_{ct}$ is a BM, so $Q_\pi(B_{c\cdot})=cQ_\pi(W)\to cT$.
+
+\sub{(c)} Let $Y_t=\int_0^tB_s\,ds$ and $M=\sup_{[0,T]}|B|$. Then $|Y_{t_i}-Y_{t_{i-1}}|\le M\Delta t_i$, so
+$Q_\pi(Y)\le M^2T|\pi|$ and $\E Q_\pi(Y)^2\le\E[M^4]T^2|\pi|^2\to0$. Here $\E M^4<\infty$, since
+$M\le\sup B+\sup(-B)$ and $\sup_{[0,T]}B\overset d=|B_T|$ by the reflection principle. The quadratic variation is $0$.
+
+\sub{(d)} If $t_0\in\pi$, then $Q_\pi(X)=Q_{\pi\cap[0,t_0]}(B)+9\,Q_{\pi\cap[t_0,T]}(B)\to t_0+9(T-t_0)$ in $L^2$.
+Otherwise let $[t_{j-1},t_j]\ni t_0$, $u=B_{t_0}-B_{t_{j-1}}$, $v=-3(B_{t_j}-B_{t_0})$. Then
+$Q_\pi(X)=Q_{\pi\cup\{t_0\}}(X)+2uv$, and by independence
+$\E(2uv)^2=36(t_0-t_{j-1})(t_j-t_0)\le 36|\pi|^2\to0$. Hence the quadratic variation is $t_0+9(T-t_0)=9T-8t_0$.
+
+
+\end{document}
