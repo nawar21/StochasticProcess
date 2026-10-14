@@ -8,7 +8,7 @@ Stochastic Processes (1060429), Technion, Spring 2026. Nawar Sgier, 326586047.
 | `Exercise02_2026.pdf` (Exercise 2) | `Exercise02_2026_solutions.tex` / `.pdf` |
 | `Exercise03_2026.pdf` (titled "Exercise 4" on the sheet) | `Exercise03_2026_solutions.tex` / `.pdf` |
 
-`solutions.tex` / `solutions.pdf` hold all three sheets in one document. "Not for submission" sections are skipped.
+Each sheet is in its own file. "Not for submission" sections are skipped.
 
 ## References
 The Moodle lecture notes were not available, so the proofs use the standard course tools listed in the syllabus: Doob's theorems for discrete-time martingales (optional stopping, the upcrossing inequality), the reflection principle, Itô's isometry and Itô's formula.
