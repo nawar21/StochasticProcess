@@ -199,7 +199,7 @@ $x=1/n$, $n\in\N$. These are countably many values, so the almost sure statement
 \emph{i.} ($a\ge\frac12$.) If $T_x<\infty$, the path is continuous on $[0,T_x]$, so $\sup_{[0,T_x]}X^x<R$ for some
 $R\in\N$. Then $X^x$ hits every $r\in(0,x)$ before $R$. Now $p_{r,R}(x)\to0$ as $r\to0$: for $a=\frac12$,
 $s(r)=\log r\to-\infty$; for $a>\frac12$, $s(r)\to+\infty$ while $s(R)-s(x)$ is finite. Hence
-$\P(T_x<\infty)\le\sum_{R\in\N}\lim_{r\to0}p_{r,R}(x)=0$.
+$\P(T_x<\infty)\le\sum_{R\in\N,\,R>x}\lim_{r\to0}p_{r,R}(x)=0$.
 
 \emph{ii.} ($a=\frac12$.) By i, $T_x=\infty$. For $0<r<x<R$,
 \[\P(X^x\text{ hits }r)\ge p_{r,R}(x)=\frac{\log R-\log x}{\log R-\log r}\xrightarrow[R\to\infty]{}1.\]
@@ -259,7 +259,7 @@ this gives $\rho_n>\rho_\infty$, a contradiction.
 
 \emph{v.} ($\frac14<a<\frac12$.) Now $S(\infty)<\infty$, since $(u(1+u))^{-2a}\le u^{-4a}$ and $4a>1$. Suppose, for
 contradiction, that $\P(T_x<T_y)=1$. Then a.s.\ $D_{T_x}>0$ and $X_t\to0$, so $V_t\to0$ as $t\uparrow T_x$. For
-$n>\max(1/D_{T_x},T_x)$ we have $D>\frac1n$ on $[0,T_x)$ and $T_x<n$, so $\rho_n$ is the hitting time of $\frac1n$ by $V$,
+$n>\max(1/D_{T_x},T_x,1/V_0)$ we have $D>\frac1n$ on $[0,T_x)$ and $T_x<n$, so $\rho_n$ is the hitting time of $\frac1n$ by $V$,
 and $S(V_{\rho_n})=S(\frac1n)\to S(0)=0$. Since $0\le S\le S(\infty)$, bounded convergence gives
 $S(V_0)=\lim_n\E S(V_{\rho_n})=0$. This contradicts $V_0=x/(y-x)>0$. Hence $\P(T_x=T_y)>0$.
 
