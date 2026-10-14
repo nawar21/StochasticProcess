@@ -46,13 +46,13 @@ L^2(\sigma(Y))$, and by Problem 2(b) (the product $V(X-Z)$ is integrable by Cauc
 \]
 Hence $\E(X-h(Y))^2=\E(X-Z)^2+\E V^2+2\E[V(X-Z)]\ge\E(X-Z)^2$.
 
-\sub{(b)} $L^2(\Omega,\sigma(Y),\P)$ is a closed subspace of $L^2(\Omega,\F,\P)$. As shown, $Z=\E[X|Y]$ lies in
+\sub{(b)} $L^2(\Omega,\sigma(Y),\P)$ is a subspace of $L^2(\Omega,\F,\P)$. It is complete (it is itself an $L^2$ space) and embeds isometrically, hence it is closed. As shown, $Z=\E[X|Y]$ lies in
 it, and $\E[V(X-Z)]=0$ for every $V\in L^2(\sigma(Y))$, i.e.\ $X-Z\perp L^2(\sigma(Y))$. These two
 properties characterise the orthogonal projection. (Equivalently, by (a): every $\sigma(Y)$-measurable $V$ is of the form $h(Y)$, so $Z$ is the closest point.)
 
 \prob{2.}
 \sub{(a)} ($\Rightarrow$) Let $Z=\E[X|\G]$. For $W=\1_A$, $A\in\G$, the identity is the definition. By linearity
-it holds for simple $W$. For $W$ with $|W|\le c$ a.s., take simple $\G$-measurable $W_n\to W$ with $|W_n|\le c$.
+it holds for simple $W$. For $W$ with $|W|\le c$ a.s., replace $W$ by $W\1_{\{|W|\le c\}}$ (equal a.s.\ and still $\G$-measurable) and take simple $\G$-measurable $W_n\to W$ with $|W_n|\le c$.
 Then $|W_nZ|\le c|Z|$ and $|W_nX|\le c|X|$, and dominated convergence gives $\E[WZ]=\E[WX]$.
 
 ($\Leftarrow$) Taking $W=\1_A$ gives $\E[Z\1_A]=\E[X\1_A]$ for $A\in\G$. Integrability of $Z$: with
@@ -83,8 +83,7 @@ a_3=3\cdot\tfrac13\Big(1-\tfrac{8}{27}\Big)=\tfrac{19}{27}.
 $\int_\Omega Y\,d\P=\E X=\infty$ forces $Y\equiv\infty$. We prove the statement for $[0,\infty]$-valued $Y$.}
 
 \emph{Existence.} For $M\in\N$ let $X_M=\min(X,M)$ and $Y_M=\E[X_M|\G]$. Since $0\le X_M\le X_{M+1}$, monotonicity gives
-$0\le Y_M\le Y_{M+1}$ a.s. Outside a null set the sequence is non-decreasing, and $Y:=\lim_MY_M\in[0,\infty]$ is
-$\G$-measurable. For $A\in\G$, monotone convergence gives
+$0\le Y_M\le Y_{M+1}$ a.s. Let $Y:=\sup_MY_M\in[0,\infty]$. It is $\G$-measurable, $Y\ge0$ a.s., and $Y_M\uparrow Y$ a.s. For $A\in\G$, monotone convergence gives
 \[\int_AY=\lim_M\int_AY_M=\lim_M\int_AX_M=\int_AX.\]
 
 \emph{Uniqueness.} Let $Y,Y'$ be two such variables and $A_n=\{Y'>Y,\ Y\le n\}\in\G$. Then
@@ -122,7 +121,8 @@ $\F_\tau=\{A\in\F_\infty:A\cap\{\tau=n\}\in\F_n\ \forall n\in\N\}$.
 \emph{Claim:} for every stopping time $\tau$, $X_\tau=\E[X_\infty|\F_\tau]$.
 
 $X_\tau=\sum_{n\in\N_\infty}X_n\1_{\{\tau=n\}}$ is $\F_\tau$-measurable, since
-$\{X_\tau\in B\}\cap\{\tau=n\}=\{X_n\in B\}\cap\{\tau=n\}\in\F_n$. By conditional Jensen, $|X_n|\le\E[|X_\infty||\F_n]$, so
+$\{X_\tau\in B\}\cap\{\tau=n\}=\{X_n\in B\}\cap\{\tau=n\}\in\F_n$ for $n\in\N$, and
+$\{X_\tau\in B\}=\bigcup_{n\in\N_\infty}\{X_n\in B,\tau=n\}\in\F_\infty$. By conditional Jensen, $|X_n|\le\E[|X_\infty||\F_n]$, so
 \[\E|X_\tau|\le\sum_n\E[|X_\infty|\1_{\{\tau=n\}}]=\E|X_\infty|.\]
 For $A\in\F_\tau$, Fubini (justified by the last bound) gives
 \[\E[X_\tau\1_A]=\sum_n\E[X_n\1_{A\cap\{\tau=n\}}]=\sum_n\E[X_\infty\1_{A\cap\{\tau=n\}}]=\E[X_\infty\1_A],\]
@@ -130,7 +130,8 @@ because $A\cap\{\tau=n\}\in\F_n$ (trivially for $n=\infty$).
 
 \sub{(a)} $\E|X_{\tau_2}|\le\E|X_\infty|<\infty$.
 
-\sub{(b)} If $A\in\F_{\tau_1}$ then $A\cap\{\tau_2\le n\}=A\cap\{\tau_1\le n\}\cap\{\tau_2\le n\}\in\F_n$, so
+\sub{(b)} Note that $A\cap\{\tau\le n\}\in\F_n$ for all $n$ iff $A\cap\{\tau=n\}\in\F_n$ for all $n$, since
+$\{\tau=n\}=\{\tau\le n\}\setminus\{\tau\le n-1\}$ and $\{\tau\le n\}=\bigcup_{k\le n}\{\tau=k\}$. If $A\in\F_{\tau_1}$ then $A\cap\{\tau_2\le n\}=A\cap\{\tau_1\le n\}\cap\{\tau_2\le n\}\in\F_n$, so
 $\F_{\tau_1}\subseteq\F_{\tau_2}$. By the claim and the tower property,
 \[\E[X_{\tau_2}|\F_{\tau_1}]=\E[\E[X_\infty|\F_{\tau_2}]|\F_{\tau_1}]=\E[X_\infty|\F_{\tau_1}]=X_{\tau_1}.\]
 
@@ -153,27 +154,34 @@ $\{Y_n\le\lambda\},\{Y_n<-\lambda\}\in\Hc_n$,
 As $\P(|Y_n|>\lambda)\le K/\lambda$ and $Y_m$ is integrable, the right side is $\le2\varepsilon$ for $\lambda$ large, uniformly in $n\ge m$.
 The finitely many $n<m$ are handled trivially. \hfill$\square$
 
-\sub{(a)} Fix $s<t$ and let $G_n=2^{-n}\N\cup\{s,t\}$; these sets are nested. Let $\tau_n=\inf\{g\in G_n:g>\tau\}$, with $\tau_n=\infty$ if
+\sub{(a)} Fix $s<t$ and let $G_n=2^{-n}\{0,1,2,\dots\}\cup\{s,t\}$; these sets are nested. Let $\tau_n=\inf\{g\in G_n:g>\tau\}$, with $\tau_n=\infty$ if
 $\tau=\infty$. Then $\{\tau_n\le g\}=\{\tau<g\}\in\F_g$, so $\tau_n$ is a $G_n$-valued stopping time, and
 it is also a stopping time for the grid $G_{n'}$, $n'\ge n$. Moreover $\tau<\tau_n\le\tau+2^{-n}$ and $\tau_n\downarrow\tau$.
 
-For $r\in\{s,t\}$, $X_{r\wedge\tau_n}=\sum_{g\in G_n\cap[0,r]}X_g\1_{\{r\wedge\tau_n=g\}}$ is
-$\F_r$-measurable. By right-continuity $X_{r\wedge\tau_n}\to X_{r\wedge\tau}$, so $X_{r\wedge\tau}$ is $\F_r$-measurable.
-For $u<r$, $\{X_{r\wedge\tau}\in B\}\cap\{\tau\le u\}=\{X_{u\wedge\tau}\in B\}\cap\{\tau\le u\}\in\F_u$, hence
-$X_{r\wedge\tau}$ is $\F_{r\wedge\tau}$-measurable.
+\emph{Measurability.} Let $r\ge0$ be arbitrary. Repeat the construction of $\tau_n$ with the grid
+$2^{-n}\{0,1,2,\dots\}\cup\{r\}$; for $r\in\{s,t\}$ this is $G_n$. Then
+$X_{r\wedge\tau_n}=\sum_{g\in G_n\cap[0,r]}X_g\1_{\{r\wedge\tau_n=g\}}$ is a finite sum and is $\F_r$-measurable, because
+$\{r\wedge\tau_n=g\}\in\F_g\subseteq\F_r$ for $g<r$ and $\{r\wedge\tau_n=r\}=\{\tau_n\ge r\}\in\F_r$. By
+right-continuity, $X_{r\wedge\tau_n}\to X_{r\wedge\tau}$ pointwise: if $\tau\ge r$ then $r\wedge\tau_n=r=r\wedge\tau$,
+and otherwise $\tau_n\downarrow\tau$. So $X_{r\wedge\tau}$ is $\F_r$-measurable for every $r\ge0$. Hence for $u<r$,
+$\{X_{r\wedge\tau}\in B\}\cap\{r\wedge\tau\le u\}=\{X_{u\wedge\tau}\in B\}\cap\{\tau\le u\}\in\F_u$, while for $u\ge r$,
+$\{X_{r\wedge\tau}\in B\}\cap\{r\wedge\tau\le u\}=\{X_{r\wedge\tau}\in B\}\in\F_r\subseteq\F_u$. Thus $X_{r\wedge\tau}$ is
+$\F_{r\wedge\tau}$-measurable.
 
 Since the stopped discrete process is a supermartingale and $s,t\in G_n$, for $A\in\F_s$,
 \[
 \E[X_{t\wedge\tau_n}\1_A]\le\E[X_{s\wedge\tau_n}\1_A].\tag{$*$}
 \]
 Let $Y_n=X_{r\wedge\tau_n}$ and let $\Hc_n$ be the $\sigma$-algebra of $r\wedge\tau_n$ on the grid $G_n$. For $m\le n$, $r\wedge\tau_n\le
-r\wedge\tau_m\le r$ are $G_n$-stopping times, so $\E[Y_m|\Hc_n]\le Y_n$. Also $\E Y_n\le\E X_0$. By the Lemma,
+r\wedge\tau_m\le r$ are $G_n$-stopping times, so $\E[Y_m|\Hc_n]\le Y_n$. Also $\E Y_n\le\E X_0$ (optional stopping with $0\le r\wedge\tau_n$, as $0\in G_n$). By the Lemma,
 $(Y_n)$ is UI. Together with a.s.\ convergence this gives $X_{r\wedge\tau_n}\to X_{r\wedge\tau}$ in $L^1$, so
 $X_{r\wedge\tau}$ is integrable. Passing to the limit in $(*)$ gives
 $\E[X_{t\wedge\tau}\1_A]\le\E[X_{s\wedge\tau}\1_A]$ for $A\in\F_s$. By Problem 1 (with reversed inequality),
 $(X_{t\wedge\tau},\F_t)$ is a supermartingale.
 
 Since $\F_{s\wedge\tau}\subseteq\F_s$ (if $A\in\F_{s\wedge\tau}$ then $A=A\cap\{s\wedge\tau\le s\}\in\F_s$),
+and $\F_{s\wedge\tau}\subseteq\F_{t\wedge\tau}$ (for $A\in\F_{s\wedge\tau}$,
+$A\cap\{t\wedge\tau\le u\}=(A\cap\{s\wedge\tau\le u\})\cap\{t\wedge\tau\le u\}\in\F_u$, since $s\wedge\tau\le t\wedge\tau$),
 $(\F_{t\wedge\tau})$ is a filtration to which $X_{t\wedge\tau}$ is adapted. The same inequality for
 $A\in\F_{s\wedge\tau}$ shows that $(X_{t\wedge\tau},\F_{t\wedge\tau})$ is a supermartingale.
 
@@ -184,7 +192,7 @@ $\tau<\infty$ a.s.\ this is not needed.) Then $|X_\tau|\le Y$, so $X_\tau$ is in
 $\E X_\tau=\lim_t\E X_{t\wedge\tau}=\E X_0$.
 
 \prob{5.}
-\sub{(a)} Let $D$ be the non-negative dyadic rationals and $F_k=D_k\cap[0,k]$. For $a<b$ let
+\sub{(a)} Let $D_k=2^{-k}\{0,1,2,\dots\}$, $D=\bigcup_kD_k$ and $F_k=D_k\cap[0,k]$. For $a<b$ let
 $U_k$ be the number of upcrossings of $[a,b]$ by $(X_t)_{t\in F_k}$. By Doob's upcrossing inequality for the
 discrete submartingale on the finite set $F_k$,
 \[(b-a)\E U_k\le\E(X_k-a)^+\le\sup_t\E X_t^++|a|.\]
@@ -194,14 +202,14 @@ $\liminf<a<b<\limsup$ would give infinitely many upcrossings).
 
 By right-continuity, if $X_t>c$ for arbitrarily large real $t$ then $X_d>c$ for arbitrarily large $d\in D$. So
 $\limsup_{t\to\infty}X_t=\limsup_{D\ni t\to\infty}X_t$, and similarly for $\liminf$. Thus $X=\lim_{t\to\infty}X_t$ exists a.s.
-Since $\E|X_t|=2\E X_t^+-\E X_t\le2\sup_t\E X_t^+-\E X_0$, Fatou's lemma gives $\E|X|<\infty$.
+Since $\E|X_t|=2\E X_t^+-\E X_t\le2\sup_t\E X_t^+-\E X_0$, Fatou's lemma gives $\E|X|<\infty$; in particular $X$ is finite a.s.
 
-\sub{(b)} \note{Right-continuity must be assumed here as well. Let $U\sim U[0,1]$ and
+\sub{(b)} \note{Right-continuity must be assumed here as well. Let $U\sim U[0,1)$ and
 $X_t=\1_{\{t-\lfloor t\rfloor=U\}}$. Then $X_t=0$ a.s.\ for each $t$, so $X$ is an $L^2$-bounded martingale, but
 every path equals $1$ at $U+k$ for all $k\in\N$ and does not converge.}
 
 Assume right-continuity. Since $\sup\E X_t^+\le\sup(\E X_t^2)^{1/2}<\infty$, (a) gives $X_t\to X$ a.s.
-For $s<t$, by Conditional expectation, Problem 2(b), $\E[X_s(X_t-X_s)]=\E[X_s\E[X_t-X_s|\F_s]]=0$. Hence
+For $s<t$, by Conditional expectation, Problem 2(b), $\E[X_s(X_t-X_s)]=\E[X_s\E[X_t-X_s|\F_s]]=0$ (the product is integrable by Cauchy--Schwarz). Hence
 $\E(X_t-X_s)^2=\E X_t^2-\E X_s^2$. So $\E X_t^2$ is non-decreasing and bounded, and $\E(X_t-X_s)^2\to0$ as $s,t\to\infty$.
 By completeness of $L^2$, $X_t\to X'$ in $L^2$. Along a sequence $t_n\to\infty$ a subsequence converges a.s.\ to $X'$,
 so $X'=X$ a.s.\ and $X\in L^2$. Finally, for $u>t$, $X_t=\E[X_u|\F_t]$ and

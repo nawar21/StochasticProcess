@@ -73,8 +73,9 @@ $\frac13B_t^3=\int_0^tB_s^2\,dB_s+\int_0^tB_s\,ds$.
 
 \prob{2.}
 \note{We take $f,g\in L^2([0,T]\times\Omega)$, i.e.\ $\E\int_0^Tf^2<\infty$ for every $T$, the class on which the Itô integral is
-an $L^2$-martingale. If only $\int_0^Tf^2ds<\infty$ a.s.\ were assumed, the claim is false in
-general; we do not pursue this.}
+an $L^2$-martingale. If only $\int_0^Tf^2ds<\infty$ a.s.\ were assumed, the claim would be false in
+general. By Dudley's representation theorem (not part of the course and not used here) there is such an $f$ with
+$\int_0^Tf\,dB=1$ a.s., and then $0+\int_0^Tf\,dB=1+\int_0^T0\,dB$ with $C\ne D$.}
 
 The Itô integral has mean zero, so taking expectations gives $C=D$. Then $\int_0^T(f-g)\,dB=0$ a.s., and by the Itô
 isometry
@@ -128,7 +129,8 @@ h_n(B_t)=h_n(B_0)+\int_0^th_n'(B_s)\,dB_s+\tfrac12\int_0^t\phi_n(B_s)\,ds .
 \]
 As $n\to\infty$: $h_n(B_t)\to g_\varepsilon(B_t)$, and $\int h_n'(B)dB\to\int g_\varepsilon'(B)dB$ in $L^2$ by the isometry and
 uniform convergence. Also $\phi_n(B_s)\to g_\varepsilon''(B_s)$ for all $s$ with $B_s\ne\pm\varepsilon$, which is a.e.\ $s$ a.s.\
-because $\E\,\Leb\{s\le t:B_s=\pm\varepsilon\}=\int_0^t\P(B_s=\pm\varepsilon)ds=0$. Bounded convergence then gives
+because $\E\,\Leb\{s\le t:B_s=\pm\varepsilon\}=\int_0^t\P(B_s=\pm\varepsilon)ds=0$. Pass to a subsequence along which the stochastic integrals converge a.s.; bounded
+convergence for the $ds$-integrals then gives
 \[
 g_\varepsilon(B_t)=g_\varepsilon(B_0)+\int_0^tg_\varepsilon'(B_s)\,dB_s+\frac1{2\varepsilon}\Leb\{s\in[0,t]:B_s\in(-\varepsilon,\varepsilon)\}.
 \]
@@ -153,87 +155,139 @@ $|B_t|=|B_0|+\int_0^t\sgn(B_s)dB_s+L_t$.
 \note{The definition should read $T_x=\inf\{t>0:X^x_t=0\}$ with $x>0$, not $\inf\{t:X^x_t>0\}$. In (b) the claim is
 $(Y_t)\overset d=(X^1_t)$. All $X^x$, $x>0$, are driven by the same $B$.}
 
-Facts used: $X^x$ is continuous and positive on $[0,T_x)$; $B_t/t\to0$ a.s.; and the
-following consequence of the equation. If $X^x_t<R$ for all $t\ge0$, then $T_x=\infty$ and
-$X^x_t\ge x+B_t+at/R\to\infty$, a contradiction. So $X^x$ cannot stay in $(r,R)$ forever.
+Facts used: $X^x$ is continuous and positive on $[0,T_x)$, and $X^x_t\to0$ as $t\uparrow T_x$ when $T_x<\infty$; also
+$B_t/t\to0$ a.s. From the equation we get two more facts.
+\begin{itemize}[leftmargin=*,nosep]
+\item On $\{T_x=\infty\}$, $X^x$ is unbounded. Indeed, if $X^x_t<R$ for all $t\ge0$ then
+$X^x_t\ge x+B_t+at/R\to\infty$, a contradiction.
+\item On $\{T_x<\infty\}$, $X^x$ reaches every $r\in(0,x)$.
+\end{itemize}
+Hence for $0<r<x<R$, $X^x$ does not stay in $(r,R)$ forever.
 
-\sub{(a)} For $t<S=T_x\wedge T_y$, $D_t=X^y_t-X^x_t=y-x+a\int_0^t\big(\frac1{X^y}-\frac1{X^x}\big)ds$ is $C^1$
-with $D'=-aD/(X^xX^y)$. Hence
-\[D_t=(y-x)\exp\Big(-a\int_0^t\frac{ds}{X^x_sX^y_s}\Big)>0 .\]
-If $T_y<T_x$, then $0<X^x_t<X^y_t\to0$ as $t\uparrow T_y$, so $X^x_{T_y}=0$, a contradiction. So $T_x\le T_y$ and
-$X^x_t<X^y_t$ for $t<T_x$. With $y=x$, the same computation gives $D\equiv0$: the equation has at most one
-solution for a given path of $B$ (pathwise uniqueness).
+\sub{(a)} For $t<S=T_x\wedge T_y$, $D_t=X^y_t-X^x_t=y-x+a\int_0^t\big(\frac1{X^y}-\frac1{X^x}\big)ds$ is $C^1$ (the
+integrand is continuous) with $D'=a\frac{X^x-X^y}{X^xX^y}=-aD/(X^xX^y)$. Hence
+\[D_t=(y-x)\exp\Big(-a\int_0^t\frac{ds}{X^x_sX^y_s}\Big)>0\qquad(t<S).\]
+If $T_y<T_x$, then $0<X^x_t<X^y_t\to0$ as $t\uparrow T_y$, so $X^x_{T_y}=0$ by continuity, contradicting $T_y<T_x$.
+So $T_x\le T_y$ and $X^x_t<X^y_t$ for $t<T_x$. With $y=x$, the same computation gives $D_t=0\cdot e^{(\dots)}=0$: for
+a given path of $B$ the equation has at most one positive continuous solution (pathwise uniqueness), and two solutions
+have the same lifetime.
 
-\sub{(b)} Let $W_t=x^{-1}B_{x^2t}$, a BM. Substituting $s=x^2u$ in
-$\int_0^{x^2t}ds/X^x_s=x^2\int_0^tdu/X^x_{x^2u}=x\int_0^tdu/Y_u$,
+\sub{(b)} Let $W_t=x^{-1}B_{x^2t}$, a BM by scaling. Substituting $s=x^2u$,
+$\int_0^{x^2t}ds/X^x_s=x^2\int_0^tdu/X^x_{x^2u}=x\int_0^tdu/Y_u$. Dividing the equation for $X^x_{x^2t}$ by $x$ gives
 \[
 Y_t=1+W_t+a\int_0^t\frac{du}{Y_u},\qquad t<T_x/x^2 .
 \]
-So $Y$ solves the equation with $x=1$ driven by $W$, and its lifetime is $T_x/x^2$. By pathwise uniqueness the solution is
-a fixed functional of the driving path, $X^1=\Phi(B)$, and therefore $Y=\Phi(W)\overset d=\Phi(B)=X^1$.
+So $Y$ is a positive continuous solution of the equation with initial point $1$ driven by $W$, with lifetime
+$T_x/x^2$. By pathwise uniqueness the solution with initial point $1$ is a fixed functional of the driving path,
+$X^1=\Phi(B)$. Hence $Y=\Phi(W)$ and $Y\overset d=X^1$ (lifetimes included), since $W\overset d=B$. This uses that
+$\Phi$ is measurable on path space. That is standard: $Z=X^1-1-B$ solves the pathwise ODE $Z'=a/(1+w+Z)$, whose
+solution depends continuously on the path $w$ by Gronwall's inequality. We take it for granted, as the problem does
+in asserting that the solution is well defined.
 
-\sub{(c)} Let $s(x)=x^{1-2a}$ for $a\ne\frac12$ and $s(x)=\log x$ for $a=\frac12$. Then $\frac12s''+\frac ax s'=0$. For
-$0<r<x<R$ let $\tau$ be the exit time of $X^x$ from $(r,R)$; it is a.s.\ finite by the facts above. Itô's
-formula for $dX=\frac a Xdt+dB$ gives $s(X_{t\wedge\tau})=s(x)+\int_0^{t\wedge\tau}s'(X)dB$, whose integrand is bounded,
-so the integral is a martingale. Bounded convergence yields $\E s(X_\tau)=s(x)$, i.e.\
+\sub{(c)} Let $s(x)=x^{1-2a}$ for $a\ne\frac12$ and $s(x)=\log x$ for $a=\frac12$. Then $s'(x)=c\,x^{-2a}$ with $c\neq0$,
+and $\frac12s''+\frac ax s'=0$. For $0<r<x<R$ let $\tau$ be the exit time of $X^x$ from $(r,R)$; it is a.s.\ finite by
+the facts above. On $[0,\tau]$, $X^x$ is an Itô process $dX=\frac aXdt+dB$ with values in $[r,R]$, and $s$ is smooth
+there. So Itô's formula gives $s(X_{t\wedge\tau})=s(x)+\int_0^{t\wedge\tau}s'(X)dB$, with integrand bounded by
+$\max_{[r,R]}|s'|$, hence a martingale. Bounded convergence ($t\to\infty$) yields $\E s(X_\tau)=s(x)$, i.e.\
 \[
 p_{r,R}(x):=\P(X^x\text{ hits }r\text{ before }R)=\frac{s(R)-s(x)}{s(R)-s(r)} .
 \]
-By (a), $T_x\le T_y$ and $X^x\le X^y$ for $x<y$. Hence it suffices to prove i, ii and iv for the countably many $x\in\N$,
-and iii for $x=1/n$, $n\in\N$.
+By (a), for $x<y$ we have $T_x\le T_y$ and $X^x<X^y$ on $[0,T_x)$. Properties ii and iv pass from $y$ to every $x<y$,
+and properties i and iii pass from $x$ to every $y>x$. So it suffices to prove ii and iv for $x\in\N$, and i and iii for
+$x=1/n$, $n\in\N$. These are countably many values, so the almost sure statements hold simultaneously for all $x>0$.
 
-\emph{i.} ($a\ge\frac12$.) If $T_x<\infty$, then $\sup_{[0,T_x]}X^x<R$ for some $R$, so $X^x$ hits every $r$ before $R$. But
-$p_{r,R}(x)\to0$ as $r\to0$, since $s(r)\to-\infty$ for $a=\frac12$, and for $a>\frac12$ we have $s(r)\to+\infty$ while
-$s(R)-s(x)$ is finite. Hence $\P(T_x<\infty)\le\sum_R\lim_{r\to0}p_{r,R}(x)=0$.
+\emph{i.} ($a\ge\frac12$.) If $T_x<\infty$, the path is continuous on $[0,T_x]$, so $\sup_{[0,T_x]}X^x<R$ for some
+$R\in\N$. Then $X^x$ hits every $r\in(0,x)$ before $R$. Now $p_{r,R}(x)\to0$ as $r\to0$: for $a=\frac12$,
+$s(r)=\log r\to-\infty$; for $a>\frac12$, $s(r)\to+\infty$ while $s(R)-s(x)$ is finite. Hence
+$\P(T_x<\infty)\le\sum_{R\in\N}\lim_{r\to0}p_{r,R}(x)=0$.
 
-\emph{ii.} ($a=\frac12$.) By i, $T_x=\infty$. $\P(X^x\text{ hits }r)\ge p_{r,R}(x)=\frac{\log R-\log x}{\log R-\log r}\to1$ as
-$R\to\infty$. Intersecting over $r=1/n$ gives $\inf_tX^x_t=0$ a.s.
+\emph{ii.} ($a=\frac12$.) By i, $T_x=\infty$. For $0<r<x<R$,
+\[\P(X^x\text{ hits }r)\ge p_{r,R}(x)=\frac{\log R-\log x}{\log R-\log r}\xrightarrow[R\to\infty]{}1.\]
+Intersecting over $r=1/n$ gives $\inf_{t>0}X^x_t=0$ a.s.
 
-\emph{iii.} ($a>\frac12$.) Here $T_x=\infty$ and $M_t=(X^x_t)^{1-2a}>0$. With
-$\sigma_n=\inf\{t:X^x_t\notin(\frac1n,n)\}\uparrow\infty$, the process $M_{t\wedge\sigma_n}$ is a bounded martingale. Conditional
-Fatou gives $\E[M_t|\F_s]\le\liminf_n M_{s\wedge\sigma_n}=M_s$, so $M$ is a non-negative continuous supermartingale. By
-Exercise 2, Martingales 5(a) applied to $-M$, $M_t\to M_\infty\in[0,\infty)$ a.s., hence $X^x_t\to X_\infty\in(0,\infty]$.
-If $X_\infty<\infty$ then $X^x$ is bounded, which contradicts the facts above. So $X^x_t\to\infty$.
+\emph{iii.} ($a>\frac12$.) By i, $T_x=\infty$. Let $M_t=(X^x_t)^{1-2a}>0$ and
+$\sigma_n=\inf\{t:X^x_t\notin(\frac1n,n)\}$. Then $\sigma_n\uparrow\infty$, since the path is continuous and positive on
+$[0,\infty)$, and $M_{t\wedge\sigma_n}=M_0+\int_0^{t\wedge\sigma_n}s'(X)dB$ is a bounded martingale. Conditional Fatou
+gives $\E[M_t|\F_s]\le\liminf_n\E[M_{t\wedge\sigma_n}|\F_s]=\liminf_nM_{s\wedge\sigma_n}=M_s$ (in particular
+$\E M_t\le M_0$). So $M$ is a non-negative continuous supermartingale. By Exercise 2, Martingales 5(a) applied to the
+submartingale $-M$ (with $\sup_t\E(-M_t)^+=0$), $M_t\to M_\infty\in[0,\infty)$ a.s. Hence $X^x_t\to X_\infty\in(0,\infty]$.
+If $X_\infty<\infty$, the continuous path would be bounded on $[0,\infty)$, contradicting the first fact. So
+$X^x_t\to\infty$ a.s.
 
-\emph{iv.} ($a<\frac12$.) Here $s(0)=0$ and $s(\infty)=\infty$. The events $E_r=\{X^x\text{ hits }r\text{ before }R\}$ decrease as $r\downarrow0$.
-On $\bigcap_rE_r$ the hitting times $\tau_r$ increase to some $\sigma\le\tau_R$. Moreover $\sigma<\infty$ a.s.: $\tau_R<\infty$ when $T_x=\infty$ by
-the facts above, and $\sigma\le T_x$ otherwise. By continuity $X^x_{\sigma}=0$, so $\sigma=T_x<\tau_R$. Hence
-\[\P(T_x<\tau_R)=\lim_{r\to0}p_{r,R}(x)=1-(x/R)^{1-2a}\to1\quad(R\to\infty),\]
-i.e.\ $T_x<\infty$ a.s.
+\emph{iv.} ($a<\frac12$.) Here $s(0^+)=0$ and $s(\infty)=\infty$. Fix $R>x$ and let $\tau_r$ ($r<x$) and $\tau_R$ be
+the hitting times of $r$ and $R$ ($\inf\emptyset=\infty$). The events $E_r=\{\tau_r<\tau_R\}$ decrease as
+$r\downarrow0$. We claim $\bigcap_{r}E_r=\{T_x<\tau_R\}$ up to a null set.
 
-For v and vi fix $y>x>0$, write $X=X^x$, $D=X^y-X^x$, and let $V=X/D$ on $[0,T_x)$. $D$ is $C^1$, $D>0$ on $[0,T_x)$, and
-$T_x<\infty$ a.s.\ by iv. By (a), $T_x=T_y$ iff $D_{T_x}=0$. From $d(1/D)=\frac{a}{XX^yD}dt$, $X=DV$ and $X^y=D(V+1)$,
+The inclusion $\supseteq$ holds by continuity. Conversely, on $\bigcap_rE_r$ the times $\tau_r$ increase to some
+$\sigma\le T_x$, and $\sigma<\infty$ a.s.: if $T_x=\infty$ then $\tau_R<\infty$ by the first fact, and
+$\sigma\le\tau_R$. If $\sigma<T_x$, continuity at $\sigma$ would give $X^x_\sigma=\lim_rX^x_{\tau_r}=0$, contradicting
+positivity on $[0,T_x)$. So $\sigma=T_x$. Since $\tau_r<\tau_R$ for all $r$, $X^x$ does not reach $R$ before $T_x$,
+i.e.\ $T_x<\tau_R$. Hence
+\[\P(T_x<\tau_R)=\lim_{r\to0}p_{r,R}(x)=\lim_{r\to0}\frac{R^{1-2a}-x^{1-2a}}{R^{1-2a}-r^{1-2a}}=1-(x/R)^{1-2a}\xrightarrow[R\to\infty]{}1,\]
+so $T_x<\infty$ a.s.
+
+\emph{Setting for v and vi.} Fix $y>x>0$ and write $X=X^x$, $D=X^y-X^x$. By (a) and iv, $T_x\le T_y$,
+$T_x<\infty$ a.s., and $D$ is $C^1$, positive and non-increasing on $[0,T_x)$. Let $D_{T_x}:=\lim_{t\uparrow T_x}D_t\ge0$.
+Since $X^y_t=X_t+D_t\to D_{T_x}$ as $t\uparrow T_x$, we have $T_x=T_y$ iff $D_{T_x}=0$. Moreover, by (a),
+\[\log D_{T_x}=\log(y-x)-a\int_0^{T_x}\frac{dt}{X_tX^y_t}.\tag{$\dagger$}\]
+On $[0,T_x)$ let $V=X/D>0$, so that $X=DV$ and $X^y=D(V+1)$. Since $1/D$ is $C^1$ with
+$d(1/D)=\frac{a}{XX^yD}dt$ (no quadratic covariation with $X$), the product rule gives
 \[
 dV=\frac1D\Big(\frac aXdt+dB\Big)+X\,d\Big(\frac1D\Big)
-=\frac{1}{D^2}\Big(\frac aV+\frac a{V+1}\Big)dt+\frac1D\,dB .
+=\frac{1}{D^2}\Big(\frac aV+\frac a{V+1}\Big)dt+\frac1D\,dB,\qquad d\langle V\rangle_t=\frac{dt}{D_t^2}.
 \]
-For $\varphi\in C^2(0,\infty)$, Itô's formula gives
+Hence for $\varphi\in C^2(0,\infty)$, Itô's formula gives
 $d\varphi(V)=D^{-2}\big(\tfrac12\varphi''+(\tfrac aV+\tfrac a{V+1})\varphi'\big)(V)\,dt+\varphi'(V)D^{-1}dB$. Let
 \[
-S(v)=\int_0^v\big(u(1+u)\big)^{-2a}du,
+S(v)=\int_0^v\big(u(1+u)\big)^{-2a}du,\qquad v\ge0,
 \]
-which is finite since $a<\frac12$. Then $\frac12S''+(\frac av+\frac a{v+1})S'=0$, and $S(V_t)$ has no $dt$ term.
-Let $\rho_n=\inf\{t<T_x:D_t\le\frac1n\text{ or }V_t\le\frac1n\}\wedge n\wedge T_x$. The integrand of $S(V)$ is bounded up
-to $\rho_n$, so $\E S(V_{\rho_n\wedge\kappa})=S(V_0)$ for every stopping time $\kappa$. Moreover $\rho_n\uparrow T_x$:
-if the limit were $<T_x$, then $D$ and $V$ would be bounded away from $0$ on a compact interval past it.
+which is finite since $2a<1$, increasing, and has decreasing derivative $S'(v)=(v(1+v))^{-2a}$. Since
+$S''/S'=-2a(\frac1v+\frac1{1+v})$, we get $\frac12S''+(\frac av+\frac a{v+1})S'=0$, so
+\[dS(V)=S'(V)D^{-1}dB.\]
+For $n\in\N$ let $\rho_n=\inf\{t<T_x:D_t\le\frac1n\text{ or }V_t\le\frac1n\}\wedge n$.
 
-\emph{v.} ($\frac14<a<\frac12$.) Now $S(\infty)<\infty$, since $(u(1+u))^{-2a}\sim u^{-4a}$ and $4a>1$. Suppose $\P(T_x<T_y)=1$.
-On $\{T_x<T_y\}$ we have $D_{T_x}>0$ and $X_t\to0$, so $V_t\to0$ as $t\uparrow T_x$. Hence for large $n$, $\rho_n$ is the hitting
-time of $\frac1n$ by $V$ and $S(V_{\rho_n})=S(\frac1n)\to0$. Since $0\le S\le S(\infty)$, bounded convergence gives
-$S(V_0)=\lim_n\E S(V_{\rho_n})=0$, contradicting $V_0=x/(y-x)>0$. Hence $\P(T_x=T_y)>0$.
+\emph{$\rho_n<T_x$.} If $D_{T_x}<\frac1n$, then $D$ reaches $\frac1n$ strictly before $T_x$. Otherwise
+$D\ge\frac1n$ on $[0,T_x)$, so $V\le nX\to0$ and $V$ reaches $\frac1n$ strictly before $T_x$. Thus $V_{\rho_n\wedge\kappa}$
+is well defined for every stopping time $\kappa$.
 
-\emph{vi.} ($a\le\frac14$.) Now $S(\infty)=\infty$. Let $\kappa_\lambda=\inf\{t:S(V_t)\ge\lambda\}$. Since $S\ge0$,
-$\lambda\P(\kappa_\lambda\le\rho_n)\le\E S(V_{\rho_n\wedge\kappa_\lambda})=S(V_0)$. Letting $n\to\infty$ and then $\lambda\to\infty$ gives
-$\sup_{t<T_x}V_t<\infty$ a.s. Now fix $K$ and let $\rho_n'=\inf\{t:D_t\le\frac1n\text{ or }V_t\ge K\}\wedge n\wedge T_x$. Taking
-expectations in the equation for $V$ (with $d\sigma=dt/D^2$, and the stochastic integral having bounded integrand $1/D\le n$),
+\emph{Optional stopping.} On $[0,\rho_n]$, $|S'(V)D^{-1}|\le S'(\frac1n)\,n$ and $\rho_n\le n$. Hence
+$\E S(V_{\rho_n\wedge\kappa})=S(V_0)$ for every stopping time $\kappa$.
+
+\emph{$\rho_n\uparrow T_x$.} $(\rho_n)$ is non-decreasing. If its limit $\rho_\infty$ were $<T_x$, then $D$ and $V$
+would be continuous and positive on the compact interval $[0,\rho_\infty]$, hence $\ge c>0$ there. For $n>\max(1/c,\rho_\infty)$
+this gives $\rho_n>\rho_\infty$, a contradiction.
+
+\emph{v.} ($\frac14<a<\frac12$.) Now $S(\infty)<\infty$, since $(u(1+u))^{-2a}\le u^{-4a}$ and $4a>1$. Suppose, for
+contradiction, that $\P(T_x<T_y)=1$. Then a.s.\ $D_{T_x}>0$ and $X_t\to0$, so $V_t\to0$ as $t\uparrow T_x$. For
+$n>\max(1/D_{T_x},T_x)$ we have $D>\frac1n$ on $[0,T_x)$ and $T_x<n$, so $\rho_n$ is the hitting time of $\frac1n$ by $V$,
+and $S(V_{\rho_n})=S(\frac1n)\to S(0)=0$. Since $0\le S\le S(\infty)$, bounded convergence gives
+$S(V_0)=\lim_n\E S(V_{\rho_n})=0$. This contradicts $V_0=x/(y-x)>0$. Hence $\P(T_x=T_y)>0$.
+
+\emph{vi.} ($a\le\frac14$.) Now $S(\infty)=\infty$, since for $u\ge1$ we have $u(1+u)\le2u^2$, hence $(u(1+u))^{-2a}\ge2^{-2a}u^{-4a}\ge2^{-2a}u^{-1}$ (as $4a\le1$), which is not integrable at $\infty$.
+
+\emph{Step 1: $\sup_{t<T_x}V_t<\infty$ a.s.} For $\lambda>S(V_0)$ let
+$\kappa_\lambda=\inf\{t<T_x:S(V_t)\ge\lambda\}$ (with $\kappa_\lambda=T_x$ if this set is empty). On
+$\{\kappa_\lambda\le\rho_n\}$ continuity gives $S(V_{\kappa_\lambda})=\lambda$. As $S\ge0$,
+$\lambda\P(\kappa_\lambda\le\rho_n)\le\E S(V_{\rho_n\wedge\kappa_\lambda})=S(V_0)$. Since $\rho_n\uparrow T_x$, every
+$\omega$ with $\kappa_\lambda<T_x$ satisfies $\kappa_\lambda\le\rho_n$ for large $n$. Hence
+$\P(\kappa_\lambda<T_x)\le S(V_0)/\lambda\to0$ as $\lambda\to\infty$. As $S$ is increasing with $S(\infty)=\infty$, this
+gives $\sup_{t<T_x}V_t<\infty$ a.s.
+
+\emph{Step 2: $D_{T_x}>0$ on $\{\sup_{t<T_x}V_t<K\}$, for each $K\in\N$ with $K>V_0$.} Let
+$\rho'_n=\inf\{t<T_x:D_t\le\frac1n\text{ or }V_t\ge K\}$ (with $\inf\emptyset=T_x$). For $m\ge n$ put
+$\theta=\rho'_n\wedge\rho_m$. Then $\theta<T_x$, $\theta\le m$, $D\ge\frac1m$ on $[0,\theta]$, and $0<V\le K$ on
+$[0,\theta]$. Integrating the equation for $V$ up to $\theta$, the $dB$-integral has bounded integrand $1/D\le m$ and
+bounded time horizon, so it has mean $0$. Dropping the non-negative term $\frac a{V+1}$,
 \[
-\E\int_0^{\rho_n'}\frac{a}{V_t}\frac{dt}{D_t^2}\le\E V_{\rho_n'}\le K .
+\E\int_0^{\theta}\frac{a}{V_tD_t^2}\,dt\le\E V_\theta-V_0\le K .
 \]
-On $\{\sup_{t<T_x}V<K\}$ we have $\rho_n'\uparrow T_x$, so monotone convergence gives
-$\int_0^{T_x}\frac{dt}{V_tD_t^2}<\infty$ a.s.\ there. Since $\frac{1}{XX^y}=\frac{1}{D^2V(V+1)}\le\frac{1}{D^2V}$,
-\[\log D_{T_x}=\log(y-x)-a\int_0^{T_x}\frac{dt}{X_tX^y_t}>-\infty,\]
-i.e.\ $D_{T_x}>0$ and $T_x<T_y$. Letting $K\to\infty$ along $\N$, $T_x<T_y$ a.s.
+As $m\to\infty$, $\theta\uparrow\rho'_n$ (because $\rho_m\uparrow T_x\ge\rho'_n$), so by monotone convergence
+$\E\int_0^{\rho'_n}\frac{a\,dt}{V_tD_t^2}\le K$. On $\{\sup_{t<T_x}V<K\}$, $\rho'_n$ is the hitting time of $\frac1n$ by $D$,
+which increases to $T_x$ as $n\to\infty$ ($D$ is continuous and positive on $[0,T_x)$). Monotone convergence again
+gives $\E\big[\1_{\{\sup V<K\}}\int_0^{T_x}\frac{dt}{V_tD_t^2}\big]\le K/a<\infty$. Since
+$\frac{1}{XX^y}=\frac{1}{D^2V(V+1)}\le\frac{1}{D^2V}$, $(\dagger)$ yields $D_{T_x}>0$ a.s.\ on $\{\sup_{t<T_x}V<K\}$.
 
-
+\emph{Conclusion.} By Step 1, $\bigcup_{K\in\N,\,K>V_0}\{\sup_{t<T_x}V<K\}$ has probability $1$. So $D_{T_x}>0$ a.s., i.e.\
+$T_x<T_y$ a.s.
 
 \end{document}

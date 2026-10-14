@@ -64,16 +64,18 @@ uniformly continuous on $[0,t_0)$, hence $\omega\in A_{t_0}$.
 
 \sub{(b)} Let $\Omega=[0,1]$, $\F=\mathcal B([0,1])$, $\P=\Leb$, and let $C$ be the Cantor set. Since
 $|\mathcal P(C)|=2^{\mathfrak c}>\mathfrak c=|\mathcal B([0,1])|$, there is $E\subset C$ with
-$E\notin\F$. Define $X_t(\omega)=\1_{E}(\omega)\1_{\{t=\omega\}}$. Then $X_t=\1_{E\cap\{t\}}$ is the
-indicator of the empty set or of a single point, so it is measurable. For $\omega\notin E$ the path is $\equiv0$. For
-$\omega\in E$ the path has a spike at $t=\omega$ and is not right-continuous there. Thus
-$\{X\text{ RCLL}\}=\Omega\setminus E\supseteq\Omega\setminus C$ and $\P(\Omega\setminus C)=1$, so
-$X$ is RCLL with probability $1$. But $A_2=\Omega\setminus E\notin\F$, and in particular
-$A_2\notin\sigma(X_t:t\le 2)\subseteq\F$.
+$E\notin\F$. Define
+\[X_t(\omega)=\1_{E}(\omega)\1_{\{t=\omega\}}+\1_{C\setminus E}(\omega)\1_{\{t=\omega+3\}}.\]
+Then $X_t=\1_{E\cap\{t\}}+\1_{(C\setminus E)\cap\{t-3\}}$ is a sum of indicators of sets with at most one point, so it is
+measurable. For $\omega\notin C$ the path is $\equiv0$. For $\omega\in E$ the path has a spike at $t=\omega\in[0,1]$. For
+$\omega\in C\setminus E$ it has a spike at $t=\omega+3\ge3$. A spike is a point where right-continuity fails. Hence
+$\{X\text{ RCLL}\}=\Omega\setminus C\in\F$ has probability $1$, so $X$ is RCLL with probability $1$ under any reading of
+this phrase. On the other hand, a path is continuous on $[0,2)$ iff $\omega\notin E$, so
+$A_2=\Omega\setminus E\notin\F$. In particular $A_2\notin\sigma(X_t:t\le 2)\subseteq\F$.
 
 \sub{(c)} There is $N\in\F$ with $\P(N)=0$ such that every path outside $N$ is RCLL. By the claim,
-$A_{t_0}\triangle C_{t_0}\subseteq N$. Completeness of $\F_{t_0}$ (it contains every subset of a
-$\P$-null set) gives $A_{t_0}\setminus C_{t_0},\,C_{t_0}\setminus A_{t_0}\in\F_{t_0}$. Hence
+$A_{t_0}\triangle C_{t_0}\subseteq N$. Completeness of $\F_{t_0}$ (as usual, this means $\F_{t_0}$ contains every subset of every
+$\P$-null set $N\in\F$) gives $A_{t_0}\setminus C_{t_0},\,C_{t_0}\setminus A_{t_0}\in\F_{t_0}$. Hence
 $A_{t_0}=(C_{t_0}\setminus(C_{t_0}\setminus A_{t_0}))\cup(A_{t_0}\setminus C_{t_0})\in\F_{t_0}$.
 
 \subsection*{Brownian motion}
@@ -96,7 +98,8 @@ $|Y_t-Y_s|\le K|t/T-s/T|^\gamma=KT^{-\gamma}|t-s|^\gamma$.
 \le 2^n\cdot 2^{\gamma\alpha n}M2^{-n(1+\beta)}=M2^{-n(\beta-\alpha\gamma)},
 \]
 which is summable since $\gamma<\beta/\alpha$. By Borel--Cantelli, a.s.\ only finitely many of these
-events occur. Let $N(\omega)$ be the last $n$ at which one occurs ($N=0$ if none occurs). Then
+events $E_n$ occur. Let $N(\omega)$ be the last $n$ at which one occurs ($N=0$ if none occurs). $N$ is
+measurable, since $\{N\le k\}=\bigcap_{n>k}E_n^c$. Then
 $\P(N<\infty)=1$ and $\max_k|X_{k2^{-n}}-X_{(k-1)2^{-n}}|\le2^{-\gamma n}$ for all $n>N(\omega)$.
 
 \sub{(d)} Fix $\omega$ with $N(\omega)<\infty$.
@@ -120,14 +123,19 @@ form a chain $s=u_0<\dots<u_k=t$ in $D$ with consecutive gaps $<2^{-N}$ and $k\l
 Each gap contributes at most $C_\gamma2^{-N\gamma}\le C_\gamma|t-s|^\gamma$. Hence on $\{N<\infty\}$,
 \[|X_t-X_s|\le K(\omega)|t-s|^\gamma\ \text{ for all } s,t\in D,\qquad K=(2^{N+1}+1)C_\gamma.\]
 
-\sub{(f)} On $\Omega^*=\{N<\infty\}$, $X|_D$ is uniformly continuous, so
-$Y_t:=\lim_{D\ni r\to t}X_r$ exists for all $t\in[0,1]$. Set $Y\equiv0$ off $\Omega^*$. Each $Y_t$ is
-measurable (a limit along a sequence), and $Y$ is $\gamma$-H\"older on $[0,1]$ with constant $K$ by
-continuity. For fixed $t$ take $r_j\in D$, $r_j\to t$: then $X_{r_j}\to Y_t$ a.s.\ and
+\sub{(f)} Let
+\[\Omega'=\bigcap_{k\ge1}\bigcup_{m\ge1}\ \bigcap_{r,r'\in D,\ |r-r'|<1/m}\{|X_r-X_{r'}|\le1/k\}\in\F\]
+be the event that $X|_D$ is uniformly continuous. By (e), $\Omega'\supseteq\Omega^*_\gamma:=\{N_\gamma<\infty\}$ for
+every $\gamma<\beta/\alpha$, where $N_\gamma$ is the variable $N$ of (c) for this $\gamma$. On $\Omega'$ the limit
+$Y_t:=\lim_{D\ni r\to t}X_r$ exists for all $t\in[0,1]$, since uniformly continuous functions on a dense set extend
+continuously. Set $Y\equiv0$ off $\Omega'$. Each $Y_t$ is measurable (a limit along a sequence), $Y$ has continuous
+paths, and $Y$ does not depend on $\gamma$. On $\Omega^*_\gamma$, $Y$ is $\gamma$-H\"older on $[0,1]$ with constant $K$,
+by (e) and continuity. For fixed $t$ take $r_j\in D$, $r_j\to t$: then $X_{r_j}\to Y_t$ a.s.\ and
 $X_{r_j}\to X_t$ in probability by (b). Limits in probability are a.s.\ unique, so $Y_t=X_t$ a.s.,
-and $Y$ is a modification of $X$. $Y$ does not depend on $\gamma$. Taking $\gamma_k\uparrow\beta/\alpha$
-and intersecting the corresponding events $\Omega^*_{\gamma_k}$ shows that a.s.\ $Y$ is $\gamma$-H\"older for every
-$\gamma<\beta/\alpha$.
+and $Y$ is a modification of $X$. Take $\gamma_k\uparrow\beta/\alpha$. On the probability-one event
+$\bigcap_k\Omega^*_{\gamma_k}$, $Y$ is $\gamma_k$-H\"older for every $k$. For $\gamma<\gamma_k$ and $|t-s|\le1$ we have
+$|t-s|^{\gamma_k}\le|t-s|^{\gamma}$, so $\gamma_k$-H\"older on $[0,1]$ implies $\gamma$-H\"older. Hence a.s.\ $Y$ is
+$\gamma$-H\"older for every $\gamma<\beta/\alpha$.
 
 \prob{2.}
 Here $t_0$ is a local maximum if there is $\varepsilon>0$ with $B_s\le B_{t_0}$ for all
@@ -139,17 +147,19 @@ By the reflection principle,
 so $\P(\max_{[0,1/n]}W>0)=1$ for every $n$. Hence
 $\P\big(\bigcup_n\{\max_{[0,1/n]}W\le0\}\big)=0$, and $\{t_0\text{ local max}\}$ is contained in a null set.
 
-\sub{(b)} $B$ attains its maximum on $[0,1]$ at some $t^*$. By (a) with $t_0=0$, a.s.\ $t^*\neq0$. The process
+\sub{(b)} Let $M=\max_{[0,1]}B$ and $G=\{M>B_0\}\cap\{M>B_1\}\in\F$. If $M=B_0$ then $0$ is a local maximum, so
+$\P(M\le B_0)=0$ by (a) with $t_0=0$. The process
 $W_s=B_1-B_{1-s}$, $s\in[0,1]$, is a continuous centred Gaussian process. Its covariance is
 \[
 \mathrm{Cov}(W_s,W_u)=1-(1-u)-(1-s)+(1-s\vee u)=s\wedge u,
 \]
-so $W$ is a BM on $[0,1]$. Moreover $t^*=1$ means $\min_{[0,1]}W\ge0$, which has probability $0$ by the argument of (a)
-applied to $-W$. So a.s.\ $t^*\in(0,1)$, and $t^*$ is a local maximum of $B$.
+so $W$ is a BM on $[0,1]$. Moreover $M=B_1$ means $\min_{[0,1]}W\ge0$, i.e.\ $\max_{[0,1]}(-W)\le0$, which has
+probability $0$ by the argument of (a) applied to the BM $-W$. Hence $\P(G)=1$. On $G$ every maximiser $t^*$ of $B$ on
+$[0,1]$ lies in $(0,1)$, so $B_s\le B_{t^*}$ for all $s$ in a neighbourhood of $t^*$, i.e.\ $t^*$ is a local maximum.
 
 \prob{3.}
 \sub{(a)} Let $Z_n=(B_{1/n}-B_{1/(n+1)})/\sqrt{1/n-1/(n+1)}$. The intervals $[\frac1{n+1},\frac1n]$ are
-disjoint, so the $Z_n$ are i.i.d.\ $N(0,1)$. Then $\sum_n\P(Z_n\ge K)=\sum_n\P(Z_1\ge K)=\infty$, and the second Borel--Cantelli
+non-overlapping (they meet only at endpoints), so by independence of increments the $Z_n$ are i.i.d.\ $N(0,1)$. Then $\sum_n\P(Z_n\ge K)=\sum_n\P(Z_1\ge K)=\infty$, and the second Borel--Cantelli
 lemma gives $\P(Z_n\ge K\text{ i.o.})=1$.
 
 \sub{(b)} Fix rationals $p<q$. The process $W_t=B_{p+t}-B_p$ is a BM. Applying (a) to $W$ for every $K\in\N$, a.s.\ for all $K$
@@ -207,8 +217,8 @@ $(RB_t)_t\overset{d}{=}(B_t)_t$.
 
 \prob{6.}
 For a partition $\pi$ of $[0,T]$ write $Q_\pi(X)=\sum_i(X_{t_i}-X_{t_{i-1}})^2$. We use the known result
-that $Q_\pi(B)\to b-a$ in $L^2$ on any interval $[a,b]$; indeed
-$\E(Q_\pi(B)-(b-a))^2=2\sum\Delta t_i^2\le2(b-a)|\pi|$.
+that $Q_\pi(B)\to v-u$ in $L^2$ for partitions $\pi$ of any interval $[u,v]$; indeed
+$\E(Q_\pi(B)-(v-u))^2=2\sum\Delta t_i^2\le2(v-u)|\pi|$.
 
 \sub{(a)} $Q_\pi(aB)=a^2Q_\pi(B)\to a^2T$.
 
